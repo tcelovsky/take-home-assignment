@@ -3,7 +3,7 @@ import React from "react";
 
 function App() {
   const [textInput, setTextInput] = React.useState('Here is some example text.');
-  const [conversionMode, setConversionMode] = React.useState('lowercase');
+  const [conversionMode, setConversionMode] = React.useState('');
   const [textOutput, setTextOutput] = React.useState('');
 
   const handleRadioChange = event => {
@@ -14,9 +14,22 @@ function App() {
     setTextInput(event.target.value);
   };
 
+  const handleTextOutput = () => {
+    switch (conversionMode) {
+      case 'lowercase':
+        setTextOutput(textInput.toLowerCase())
+      break;
+      case 'uppercase':
+        setTextOutput(textInput.toUpperCase())
+      break;
+      default:
+        setTextOutput(textInput)
+    }
+  }
+
   const handleSubmit = event => {
     event.preventDefault();
-    setTextOutput('Your formatted text will go here!')
+    handleTextOutput();
   };
 
   return (
